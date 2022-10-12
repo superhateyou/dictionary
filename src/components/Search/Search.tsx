@@ -4,12 +4,14 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {SearchActionTypes} from "../../types/search";
 import {fetchWord} from "../../store/action-creator/responce";
 import {useAppDispatch} from "../../hooks/useTypedDispatch";
+import {useActions} from "../../hooks/useActions";
 
 const Search = () => {
   const location = useLocation()
   const navigate = useNavigate()
-
   const dispatch = useAppDispatch()
+  const {fetchWord} = useActions()
+
   const searchValue = useTypedSelector(state => state.search)
 
   const [dirty, setDirty] = useState(false)
@@ -17,7 +19,7 @@ const Search = () => {
 
   const clickHandler = (event: React.MouseEvent<HTMLElement>) => {
     navigate('/' + searchValue)
-    dispatch(fetchWord(searchValue));
+    fetchWord(searchValue);
     event.preventDefault();
   };
 
@@ -38,7 +40,7 @@ const Search = () => {
   useEffect(() => {
     navigate(location.pathname)
     if (location.pathname.slice(1).length > 0) {
-      dispatch(fetchWord(location.pathname.slice(1)))
+      fetchWord(location.pathname.slice(1))
       dispatch({type: SearchActionTypes.SET_SEARCH, payload: location.pathname.slice(1)})
     }
   }, [])
