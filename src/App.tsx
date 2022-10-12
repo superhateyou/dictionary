@@ -10,9 +10,9 @@ function App() {
     <div className="App-wrapper">
       <Search/>
       <Routes>
-        <Route path='/' element={<Home/>}></Route>
-        <Route path='/:id' element={<Result/>}></Route>
-        <Route path='*' element={<NotFound/>}></Route>
+        <Route path='/' element={<Home/>}/>
+        <Route path='/:id' element={<Result/>}/>
+        <Route path='*' element={<NotFound/>}/>
       </Routes>
     </div>
   </div>;
