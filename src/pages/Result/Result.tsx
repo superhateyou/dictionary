@@ -2,6 +2,7 @@ import React from 'react';
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import Loader from "../../partials/loader";
 import Word from "../../components/Word/Word";
+import NotFound from "../NotFound/NotFound";
 
 const Result = () => {
   const responceData = useTypedSelector(state => state.responce)
@@ -13,7 +14,7 @@ const Result = () => {
   )
   else return (
     <div>
-      {!error ? <Word/> : <div>error</div>}
+      {!error ? <Word/> : <NotFound/>}
     </div>
   )
 };

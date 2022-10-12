@@ -35,6 +35,14 @@ const Search = () => {
     }
   }
 
+  useEffect(() => {
+    navigate(location.pathname)
+    if (location.pathname.slice(1).length > 0) {
+      dispatch(fetchWord(location.pathname.slice(1)))
+      dispatch({type: SearchActionTypes.SET_SEARCH, payload: location.pathname.slice(1)})
+    }
+  }, [])
+
   return (
     <form className="flex items-center p-10">
       <label htmlFor="simple-search"
