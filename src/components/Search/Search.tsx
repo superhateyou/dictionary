@@ -2,7 +2,6 @@ import React, {useEffect, useState} from "react";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {SearchActionTypes} from "../../types/search";
-import {fetchWord} from "../../store/action-creator/responce";
 import {useAppDispatch} from "../../hooks/useTypedDispatch";
 import {useActions} from "../../hooks/useActions";
 
