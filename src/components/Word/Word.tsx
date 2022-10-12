@@ -11,7 +11,9 @@ const Word = () => {
     <>
       {wordData?.map((word:IWord, index) =>
         <div className='bg-blue-400 rounded-lg m-5 p-1'>
-          <h1 className='text-2xl font-bold p-5 flex justify-center'>{word.word}{wordData?.length > 1 ? ' №' + `${index + 1}` : null}</h1>
+          <h1 className='text-2xl font-bold p-5 flex justify-center'>
+            {word.word}{wordData?.length > 1 ? ' №' + `${index + 1}` : null}
+          </h1>
           <Phonetics {...word.phonetics}/>
           <Meanings {...word.meanings}/>
         </div>
