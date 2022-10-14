@@ -6,7 +6,7 @@ import {useAppDispatch} from "../../hooks/useTypedDispatch";
 import {useActions} from "../../hooks/useActions";
 
 const Search = () => {
-  const location = useLocation()
+  const location = useLocation().pathname.slice(1)
   const navigate = useNavigate()
   const dispatch = useAppDispatch()
   const {fetchWord} = useActions()
@@ -14,12 +14,11 @@ const Search = () => {
   const searchValue = useTypedSelector(state => state.search)
 
   const [dirty, setDirty] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('Invalid input')
+  const [errorMessage, setErrorMessage] = useState('Invalid input. Input must contain only english characters')
 
-  const clickHandler = (event: React.MouseEvent<HTMLElement>) => {
+  const submitHandler = () => {
     navigate('/' + searchValue)
     fetchWord(searchValue);
-    event.preventDefault();
   };
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -27,7 +26,7 @@ const Search = () => {
     const reg = /^[a-zA-Z]+$/
     dispatch({type: SearchActionTypes.SET_SEARCH, payload: value})
     if (!reg.test(String(value))) {
-      setErrorMessage('Invalid input')
+      setErrorMessage('Invalid input. Input must contain only english characters')
       setDirty(true)
     }
     else {
@@ -37,10 +36,9 @@ const Search = () => {
   }
 
   useEffect(() => {
-    navigate(location.pathname)
-    if (location.pathname.slice(1).length > 0) {
-      fetchWord(location.pathname.slice(1))
-      dispatch({type: SearchActionTypes.SET_SEARCH, payload: location.pathname.slice(1)})
+    if (location.length > 0) {
+      fetchWord(location)
+      dispatch({type: SearchActionTypes.SET_SEARCH, payload: location})
     }
   }, [])
 
@@ -62,8 +60,8 @@ const Search = () => {
                }
                required/>
       </div>
-      <button type="submit"
-              onClick={(event: React.MouseEvent<HTMLElement>) => clickHandler(event)}
+      <button type="button"
+              onClick={() => submitHandler()}
               disabled={dirty}
               className="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         <span>

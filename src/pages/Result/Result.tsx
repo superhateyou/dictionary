@@ -5,17 +5,18 @@ import Word from "../../components/Word/Word";
 import NotFound from "../NotFound/NotFound";
 
 const Result = () => {
-  const responceData = useTypedSelector(state => state.responce)
-  const loading: boolean = responceData.loading || false;
-  const error: string | null = responceData.error
+  const {loading, error} = useTypedSelector(state => state.responce)
 
-  if (loading) return (
-    <Loader/>
-  )
-  else return (
-    <div>
+  if (loading) {
+    return (
+      <Loader/>
+    )
+  }
+
+  return (
+    <>
       {!error ? <Word/> : <NotFound/>}
-    </div>
+    </>
   )
 };
 
