@@ -4,6 +4,7 @@ import {useTypedSelector} from "../../hooks/useTypedSelector";
 import {SearchActionTypes} from "../../types/search";
 import {useAppDispatch} from "../../hooks/useTypedDispatch";
 import {useActions} from "../../hooks/useActions";
+import {ResponceActionTypes} from "../../types/responce";
 
 const Search = () => {
   const location = useLocation().pathname.slice(1)
@@ -16,10 +17,18 @@ const Search = () => {
   const [dirty, setDirty] = useState(false)
   const [errorMessage, setErrorMessage] = useState('Invalid input. Input must contain only english characters')
 
-  const submitHandler = () => {
+  const submitHandler = (event: React.MouseEvent<HTMLElement>) => {
     navigate('/' + searchValue)
-    fetchWord(searchValue);
+    event.preventDefault()
   };
+
+  const resetHandler = () => {
+    navigate('/')
+    setErrorMessage('')
+    setDirty(false)
+    dispatch({type: SearchActionTypes.CLEAR_SEARCH})
+    dispatch({type: ResponceActionTypes.RESET_WORD})
+  }
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value
@@ -40,7 +49,7 @@ const Search = () => {
       fetchWord(location)
       dispatch({type: SearchActionTypes.SET_SEARCH, payload: location})
     }
-  }, [])
+  }, [location])
 
   return (
     <form className="flex items-center p-10">
@@ -60,12 +69,19 @@ const Search = () => {
                }
                required/>
       </div>
-      <button type="button"
-              onClick={() => submitHandler()}
+      <button type="submit"
+              onClick={(event: React.MouseEvent<HTMLElement>) => submitHandler(event)}
               disabled={dirty}
               className="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         <span>
           Search
+        </span>
+      </button>
+      <button type="button"
+              onClick={() => resetHandler()}
+              className="p-2.5 ml-2 text-sm font-medium text-white bg-blue-600 rounded-lg border border-blue-700 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        <span>
+          Reset
         </span>
       </button>
     </form>
