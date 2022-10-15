@@ -15,7 +15,7 @@ const Search = () => {
   const searchValue = useTypedSelector(state => state.search);
 
   const [dirty, setDirty] = useState(false);
-  const [errorMessage, setErrorMessage] = useState("Invalid input. Input must contain only english characters");
+  const [errorMessage, setErrorMessage] = useState("Invalid input");
 
   const submitHandler = (event: React.MouseEvent<HTMLElement>) => {
     navigate("/" + searchValue);
@@ -35,7 +35,7 @@ const Search = () => {
     const reg = /^[a-zA-Z]+$/;
     dispatch({type: SearchActionTypes.SET_SEARCH, payload: value});
     if (!reg.test(String(value))) {
-      setErrorMessage("Invalid input. Input must contain only english characters");
+      setErrorMessage("Invalid input");
       setDirty(true);
     } else {
       setErrorMessage("");
@@ -55,8 +55,8 @@ const Search = () => {
              className="sr-only">
         Search
       </label>
-      <div className="relative max-w-5xl">
-        {(dirty && errorMessage) && <div className='text-red-700 absolute -mt-6 text-lg'>{errorMessage}</div>}
+      <div className="relative max-w-5xl flex justify-center">
+        {(dirty && errorMessage) && <div className='text-red-700 absolute mt-10 text-sm'>{errorMessage}</div>}
         <input type="text"
                id="simple-search"
                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -70,14 +70,14 @@ const Search = () => {
               disabled={dirty}
               className="p-2.5 ml-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         <span>
-          Search
+          🔍
         </span>
       </button>
       <button type="button"
               onClick={() => resetHandler()}
               className="p-2.5 ml-2 text-sm font-medium text-white bg-blue-600 rounded-lg border border-blue-700 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         <span>
-          Reset
+          ❌
         </span>
       </button>
     </form>);
