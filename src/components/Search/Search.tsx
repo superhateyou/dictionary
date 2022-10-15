@@ -50,7 +50,7 @@ const Search = () => {
     }
   }, [location]);
 
-  return (<form className="flex items-center p-10">
+  return (<form className="flex items-center p-1">
       <label htmlFor="simple-search"
              className="sr-only">
         Search
