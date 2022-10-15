@@ -34,7 +34,7 @@ const Search = () => {
     const value = event.target.value;
     const reg = /^[a-zA-Z]+$/;
     dispatch({type: SearchActionTypes.SET_SEARCH, payload: value});
-    if (!reg.test(String(value))) {
+    if (!reg.test(String(value).toLowerCase())) {
       setErrorMessage("Invalid input");
       setDirty(true);
     } else {
@@ -50,7 +50,7 @@ const Search = () => {
     }
   }, [location]);
 
-  return (<form className="flex items-center p-1">
+  return (<form className="flex items-center p-1 pb-2 justify-center">
       <label htmlFor="simple-search"
              className="sr-only">
         Search

@@ -14,3 +14,15 @@
   display: flex;
   flex-direction: column;
 }
+
+@media (min-width: 576px) and (max-width: 1200px) {
+  .App-wrapper {
+    width: 50%;
+  }
+}
+
+@media (max-width: 575px) {
+  .App-wrapper {
+    width: 1000%;
+  }
+}
