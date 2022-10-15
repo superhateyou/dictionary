@@ -55,7 +55,7 @@ const Search = () => {
              className="sr-only">
         Search
       </label>
-      <div className="relative w-full">
+      <div className="relative max-w-5xl">
         {(dirty && errorMessage) && <div className='text-red-700 absolute -mt-6 text-lg'>{errorMessage}</div>}
         <input type="text"
                id="simple-search"
