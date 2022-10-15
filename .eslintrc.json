@@ -11,5 +11,8 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint"],
-  "rules": {}
+  "rules": {
+    "quotes": ["warn", "double"],
+    "semi-style": ["warn", "last"]
+  }
 }

@@ -1,6 +1,5 @@
 export enum SearchActionTypes {
-  SET_SEARCH = 'SET_SEARCH',
-  CLEAR_SEARCH = 'CLEAR_SEARCH'
+  SET_SEARCH = "SET_SEARCH", CLEAR_SEARCH = "CLEAR_SEARCH"
 }
 
 interface SetSearchAction {
